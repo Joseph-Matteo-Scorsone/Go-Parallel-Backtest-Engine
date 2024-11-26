@@ -2,13 +2,18 @@ package models
 
 import "parallel_backtester/utils"
 
-type Stragey interface {
-	Execute(data []utils.PriceData) BacktestResult
+type Strategy interface {
+	Execute(data []utils.PriceData, modelName string) (map[string]float64, BacktestResult)
 }
 
 type BacktestResult struct {
-	TotalProfit   float64
-	WinRate       float64
-	Trades        int
-	WinningTrades int
+	TakeProfit       float64
+	StopLoss         float64
+	TotalProfit      float64
+	WinRate          float64
+	Trades           int
+	WinningTrades    int
+	AccountValues    []float64
+	FinalBalance     float64
+	PercentageReturn float64
 }
